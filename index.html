@@ -487,17 +487,44 @@ function isMobileDevice() {
     return window.innerWidth <= 600;
   }
 
+  function getVideoDuration(videoFilePath) {
+    return new Promise((resolve, reject) => {
+        const videoElement = document.createElement('video');
+        videoElement.onloadedmetadata = () => {
+            resolve(videoElement.duration * 1000); // Convert duration to milliseconds
+        };
+        videoElement.onerror = (error) => {
+            reject(error);
+        };
+        videoElement.src = videoFilePath;
+    });
+}
+
+const introVideoFilePath = "./intro.mp4";
+let videoTime = 21000;
+getVideoDuration(introVideoFilePath)
+    .then(duration => {
+        videoTime = duration;
+    })
+    .catch(error => {
+        console.error("Error loading video:", error);
+    });
+
+
   let instaURL
   if (isMobileDevice()) {
     instaURL = 'instagram://user?username=thefotoscape'
   } else {
     instaURL = 'https://www.instagram.com/thefotoscape';
   }
+
 const showPopup = () => {
     const popup = document.getElementById('popup');
     popup.style.display = 'block';
   };
-  const redirectTimeout = setTimeout(() => {
+  
+  playPauseBtn.addEventListener("click", () => {
+    const redirectTimeout = setTimeout(() => {
     showPopup();
     const redirectTimer = setTimeout(() => {
         
@@ -509,7 +536,11 @@ const showPopup = () => {
       popup.style.display = 'none';
       clearTimeout(redirectTimer);
     });
-  }, 21000);
+  }, videoTime);
+  });
+  
+
+
   </script>
 </body>
 </html>
