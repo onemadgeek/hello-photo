@@ -483,7 +483,16 @@ mainVideo.addEventListener("pause", () => playPauseBtn.classList.replace("fa-pau
 playPauseBtn.addEventListener("click", () => {mainVideo.paused ? mainVideo.play() : mainVideo.pause(); blurvid.paused ? blurvid.play() : blurvid.pause()});
 videoTimeline.addEventListener("mousedown", () => videoTimeline.addEventListener("mousemove", draggableProgressBar));
 document.addEventListener("mouseup", () => videoTimeline.removeEventListener("mousemove", draggableProgressBar));
+function isMobileDevice() {
+    return window.innerWidth <= 600;
+  }
 
+  let instaURL
+  if (isMobileDevice()) {
+    instaURL = 'instagram://user?username=thefotoscape'
+  } else {
+    instaURL = 'https://www.instagram.com/thefotoscape';
+  }
 const showPopup = () => {
     const popup = document.getElementById('popup');
     popup.style.display = 'block';
@@ -491,7 +500,8 @@ const showPopup = () => {
   const redirectTimeout = setTimeout(() => {
     showPopup();
     const redirectTimer = setTimeout(() => {
-      window.location.href = 'https://www.instagram.com/thefotoscape';
+        
+      window.location.href = instaURL;
     }, 3000);
     const cancelRedirectButton = document.getElementById('cancelRedirect');
     cancelRedirectButton.addEventListener('click', () => {
