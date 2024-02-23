@@ -297,9 +297,40 @@ body{
         .popup-button:hover {
           background-color: #0056b3;
         }
+        .logo-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+    }
+
+    #logo {
+        width: 15vw;
+        max-width: 100px;
+        height: auto;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+        #logo {
+            width: 20vw;
+            max-width: 100px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        #logo {
+            width: 25vw;
+            max-width: 80px;
+        }
+    }
       </style>
 </head>
 <body>
+    <div class="logo-container">
+        <img src="./logo.jpg" alt="thefotoscape" id="logo">
+       </div>
     <video src="./intro.mp4" poster="./thumbnail.jpg" id="blurred"></video>
     <div class="popup-container" id="popup">
         <div class="popup-content">
@@ -539,7 +570,14 @@ const showPopup = () => {
   }, videoTime);
   });
   
-
+  document.addEventListener("DOMContentLoaded", function() {
+        const logo = document.getElementById('logo');
+        function redirectToInstagram() {
+            const isMobile = window.innerWidth <= 600;
+            window.location.href = instaURL;
+        }
+        logo.addEventListener('click', redirectToInstagram);
+    });
 
   </script>
 </body>
