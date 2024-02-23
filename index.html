@@ -3,30 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video and Redirect</title>
+  <title>welcome</title>
 </head>
 <body>
-  <!-- YouTube video embedded -->
   <iframe width="560" height="315" src="https://www.youtube.com/embed/xuP4g7IDgDM" frameborder="0" allowfullscreen></iframe>
 
   <script>
-    // Function to redirect to Instagram page after a certain time
     function redirectToInstagram() {
       window.location.replace("https://www.instagram.com/thefotoscape/");
     }
 
-    // Play the video and then redirect
     window.onload = function() {
-      // Replace 'VIDEO_ID_HERE' with the actual YouTube video ID
       var video = document.querySelector('iframe[src^="https://www.youtube.com/embed/xuP4g7IDgDM"]');
-      
-      // Play the video
       if(video) {
         video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
       }
-
-      // Redirect to Instagram after 10 seconds
-      setTimeout(redirectToInstagram, 10000); // Adjust the time as needed
+      setTimeout(redirectToInstagram, 10000);
     };
   </script>
 </body>
